@@ -1,0 +1,1 @@
+inspired by [Statistics For Hackers](https://speakerdeck.com/jakevdp/statistics-for-hackers)
