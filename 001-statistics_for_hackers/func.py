@@ -6,9 +6,9 @@ import numpy as np
 def draw_bar_plot_heads_counts(unique, counts):
     f,ax = plt.subplots(figsize=(12, 7))
     plt.bar(unique, counts)
-    plt.xlabel('x')
-    plt.ylabel('Frequency of heads')
-    plt.title('Frequencies of Heads')
+    plt.xlabel('number of heads')
+    plt.ylabel('frequency')
+    plt.title('Frequency of Number of Heads')
     plt.show()
     
 def draw_step_plot_head_probabilities(unique, probabilities, what_we_get=None, probability_of_what_we_get=None):
@@ -18,12 +18,13 @@ def draw_step_plot_head_probabilities(unique, probabilities, what_we_get=None, p
         plt.axvline(what_we_get, c='red')
         plt.text(
             what_we_get + 0.3, 0.12, 
-            s='this is {}, with prob: {}%'.format(what_we_get, probability_of_what_we_get * 100), 
+            s='this is {}, with prob: {:.2%}'.format(what_we_get, probability_of_what_we_get), 
             color='red'
         )
 
-    plt.ylabel('Probability')
-    plt.title('Probabilities of Number of Heads Happening')
+    plt.xlabel('number of heads')
+    plt.ylabel('probability')
+    plt.title('Number of Heads Distribution')
     plt.show()
     
     
@@ -35,7 +36,7 @@ def draw_ctp_happening_binned(ctp_current, bins, ctp_bin_indexes, ctp_bin_counts
 
     plt.subplot(121)
     plt.title('Frequency of CTP Happening (Binned)')
-    plt.bar(ctp_bin_indexes, ctp_bin_counts, alpha=0.5)
+    plt.bar(ctp_bin_indexes, ctp_bin_counts, width=1, alpha=0.5)
     plt.axvline(ctp_current_bin, color='red')
     plt.annotate(
         'current ctp: {:.2f}'.format(ctp_current),
@@ -46,12 +47,14 @@ def draw_ctp_happening_binned(ctp_current, bins, ctp_bin_indexes, ctp_bin_counts
 
         )
     )
-    plt.xticks(ctp_bin_indexes, labels=['{:.2f}'.format(x) for x in bins[ctp_bin_indexes]])
+    plt.xticks(ctp_bin_indexes, ['{:.2f}'.format(x) for x in bins[ctp_bin_indexes]])
+    plt.xlabel('CTP')
+    plt.ylabel('frequency')
 
 
     plt.subplot(122)
     plt.title('Probability of CTP Happening (Binned)')
-    plt.bar(ctp_bin_indexes, ctp_bin_counts/ctp_bin_counts.sum(), alpha=0.8)
+    plt.bar(ctp_bin_indexes, ctp_bin_counts/ctp_bin_counts.sum(), width=1, alpha=0.8)
     plt.axvline(ctp_current_bin, color='red')
     plt.annotate(
         'current ctp prob: {:.2f}'.format(prob_ctp_current),
@@ -63,7 +66,9 @@ def draw_ctp_happening_binned(ctp_current, bins, ctp_bin_indexes, ctp_bin_counts
 
         )
     )
-    plt.xticks(ctp_bin_indexes, labels=['{:.2f}'.format(x) for x in bins[ctp_bin_indexes]])
+    plt.xticks(ctp_bin_indexes, ['{:.2f}'.format(x) for x in bins[ctp_bin_indexes]])
+    plt.xlabel('CTP')
+    plt.ylabel('p(CTP)')
 
     plt.show()
 
